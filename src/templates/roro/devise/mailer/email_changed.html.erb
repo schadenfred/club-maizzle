@@ -1,0 +1,33 @@
+---
+title: "Notice of email change"
+preheader: "Notice of email change -- Let us know if this doesn't seem quite right."
+bodyClass: bg-slate-50
+---
+
+<x-main>
+  <h1 class="m-0 mb-6 text-2xl sm:leading-8 text-black font-semibold">
+    Hello Handsome,
+  </h1>
+
+  <p class="m-0 leading-6">
+    We wanted to make sure you know that your email
+    <if condition="page.env === 'production'">
+      <% if @resource.try(:unconfirmed_email?) %>
+        is being changed to <%= @resource.unconfirmed_email %>.
+      <% else %>
+        has been changed to <%= @resource.email %>.
+      <% end %>
+    </if>
+    <if condition="page.env === 'local'">
+      is being changed to localpart@example.com.
+    </if>
+    </p>
+    <br>Please let us know if something seems wrong.
+  </p>
+
+  <p class="m-0">
+    <br>
+    <br>
+    Thanks, <br />schadenfred
+  </p>
+</x-main>

@@ -1,0 +1,27 @@
+---
+title: "Notice of subscription renewal"
+preheader: "Please confirm you'd like to continue with your subscription."
+bodyClass: bg-slate-50
+---
+
+<x-main>
+  <h1 class="m-0 mb-6 text-2xl sm:leading-8 text-black font-semibold">
+    Hello Handsome,
+  </h1>
+
+  <p class="m-0 leading-6">
+    We sometimes feel dumb and taken advantage of when we're charged for subscriptions 
+    we aren't using, and we figure you might feel that way too, and so we wanted to make sure you 
+    know your subscription will renew automatically on <%= l params[:date].to_date, format: :long %>.
+  </p>
+
+  <x-spacer height="24px" />
+
+  <p class="m-0">
+    If you don't wish to continue, you can manage your 
+    account <%= link_to "here", root_url %>. Otherwise you're all set.
+    <br>
+    <br>
+    Thanks, <br />schadenfred
+  </p>
+</x-main>

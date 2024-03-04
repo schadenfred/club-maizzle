@@ -1,0 +1,33 @@
+---
+title: "Your trial ends soon"
+preheader: "Please confirm you'd like to continue with your subscription."
+bodyClass: bg-slate-50
+---
+
+<x-main>
+  <h1 class="m-0 mb-6 text-2xl sm:leading-8 text-black font-semibold">
+    Hello Handsome,
+  </h1>
+
+  <p class="m-0 leading-6">
+    We wanted to make sure you know your trial with us is ending soon so if you haven't 
+    gotten all you can you should get it now. If you know enough that you want to continue, 
+    you can manage your account <%= link_to "here", root_url %>.  
+    <br>
+    <br>
+  </p>
+
+  <x-spacer height="24px" />
+
+  <x-button href='pay.payment_url(params[:payment_intent_id])'>
+    Confirm payment &rarr;
+  </x-button>
+
+  <x-divider space-y="32px" class="bg-slate-200" />
+
+  <p class="m-0">
+    <br>
+    <br>
+    Thanks, <br />schadenfred
+  </p>
+</x-main>

@@ -1,0 +1,33 @@
+---
+title: "Unlock account"
+preheader: "Are you trying to log into your account? We locked it to be safe."
+bodyClass: bg-slate-50
+---
+
+<x-main>
+  <h1 class="m-0 mb-6 text-2xl sm:leading-8 text-black font-semibold">
+    Hello Handsome,
+  </h1>
+
+  <p class="m-0 leading-6">
+    Someone is having trouble logging into your account and we thought it safest to make sure that this someone is you.  
+    <br>
+    <br>
+    Please click the link below to unlock your account: 
+  </p>
+
+  <x-spacer height="24px" />
+
+  <x-button href='unlock_url(@resource, unlock_token: @token)'>
+    Unlock my account &rarr;
+  </x-button>
+
+  <x-divider space-y="32px" class="bg-slate-200" />
+
+  <p class="m-0">
+    Please let us know if this doesn't seem quite right.
+    <br>
+    <br>
+    Thanks, <br />schadenfred
+  </p>
+</x-main>

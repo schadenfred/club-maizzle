@@ -1,0 +1,33 @@
+---
+title: "Continue your subscription"
+preheader: "Please confirm you'd like to continue with your subscription."
+bodyClass: bg-slate-50
+---
+
+<x-main>
+  <h1 class="m-0 mb-6 text-2xl sm:leading-8 text-black font-semibold">
+    Hello Handsome,
+  </h1>
+
+  <p class="m-0 leading-6">
+    We sometimes feel dumb and taken advantage of when we're charged for subscriptions we aren't using, and we figure you might feel that way too.  
+    <br>
+    <br>
+    If you'd like to continue with your subscription, please let us know through the button below:
+  </p>
+
+  <x-spacer height="24px" />
+
+  <x-button href='pay.payment_url(params[:payment_intent_id])'>
+    Confirm payment &rarr;
+  </x-button>
+
+  <x-divider space-y="32px" class="bg-slate-200" />
+
+  <p class="m-0">
+    If you don't wish to continue, you can safely ignore this email.
+    <br>
+    <br>
+    Thanks, <br />schadenfred
+  </p>
+</x-main>

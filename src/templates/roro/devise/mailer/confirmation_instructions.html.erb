@@ -1,0 +1,33 @@
+---
+title: "Please confirm your email address"
+preheader: "Did you just create an account with us? Please confirm your email address."
+bodyClass: bg-slate-50
+---
+
+<x-main>
+  <h1 class="m-0 mb-6 text-2xl sm:leading-8 text-black font-semibold">
+    Hello Handsome,
+  </h1>
+
+  <p class="m-0 leading-6">
+    Someone created an account with us using this email address.
+    <br>
+    <br>
+    Would you mind confirming this person was you via the button below?
+  </p>
+
+  <x-spacer height="24px" />
+
+  <x-button href='confirmation_url(@resource, confirmation_token: @token)'>
+    Confirm email address &rarr;
+  </x-button>
+
+  <x-divider space-y="32px" class="bg-slate-200" />
+
+  <p class="m-0">
+    If you didn't create an account with with us, you can safely ignore this email.
+    <br>
+    <br>
+    Thanks, <br />schadenfred
+  </p>
+</x-main>
