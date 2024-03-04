@@ -1,0 +1,67 @@
+# syntax=docker/dockerfile:1
+
+FROM handsomefencer/rails:3.3.0-7.0.3 AS production
+FROM handsomefencer/rails-build-deps AS builder
+
+FROM builder AS stage-cache-gems
+
+COPY Gemfile Gemfile.lock ./
+
+RUN bundle config set without "development test" && \
+  bundle config frozen true && \
+  bundle
+
+FROM builder AS stage-cache-node_modules
+
+COPY package.json yarn.lock ./
+
+RUN yarn install \
+  --frozen-lockfile \
+  --production 
+
+FROM builder AS stage-slim
+
+COPY . .
+
+COPY  \
+  --from=stage-cache-gems \
+  /usr/local/bundle /usr/local/bundle
+
+COPY  \
+  --from=stage-cache-node_modules \
+  /app/node_modules /app/node_modules
+
+RUN \
+  SECRET_KEY_BASE=1 \
+  RAILS_ENV=production \
+  bin/rails assets:precompile
+
+RUN gem cleanup
+
+RUN bundle clean --force
+
+RUN rm -rf /usr/local/bundle/cache && \
+  find /usr/local/bundle/gems/ -name "*.c" -delete && \
+  find /usr/local/bundle/gems/ -name "*.o" -delete
+
+RUN rm -rf \
+  node_modules \
+  public/assets \
+  test   
+
+FROM production
+
+RUN apk update && \
+  apk add --update \
+  postgresql-client \
+  && apk cache -v sync
+
+RUN adduser -D app
+
+USER app
+
+COPY --chown=app --from=stage-slim \ 
+  /app /app
+
+COPY --chown=app --from=stage-slim \ 
+  /usr/local/bundle /usr/local/bundle

@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.prod.yml -o mise/k8s/konvert
+    kompose.version: 1.22.0 (955b78124)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: app
+  name: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: app
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.prod.yml -o mise/k8s/konvert
+        kompose.version: 1.22.0 (955b78124)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: app
+    spec:
+      containers:
+        - command:
+            - ./entrypoints/app-prod.sh
+          image: handsomefencer/club:latest
+          imagePullPolicy: Always
+          name: app
+          ports:
+            - containerPort: 3000
+          resources: {}
+          volumeMounts:
+            - name: mise
+              mountPath: /opt
+      initContainers:
+        - name: obfuscated
+          image: handsomefencer/club:latest
+          imagePullPolicy: Always
+          command: 
+            - /bin/sh
+            - -c
+            - |
+              cp -r /app/mise /opt/
+          volumeMounts:
+            - name: mise
+              mountPath: /opt
+        - name: roro
+          command:
+            - /bin/sh
+            - -c
+            - | 
+              cd /opt/ && roro generate:exposed base production
+          env:
+            - name: BASE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: BASE_KEY    
+            - name: PRODUCTION_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: PRODUCTION_KEY    
+          image: handsomefencer/roro:latest
+          volumeMounts:
+            - name: mise
+              mountPath: /opt
+        
+      volumes:
+        - name: mise
+          emptyDir: {}
+status: {}
