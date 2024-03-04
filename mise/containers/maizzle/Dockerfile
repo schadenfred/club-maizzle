@@ -9,4 +9,4 @@ RUN apk add --update --no-cache \
 
 COPY . .
 
-WORKDIR /vendor/maizzle
+WORKDIR /artifact

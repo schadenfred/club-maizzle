@@ -1,5 +1,0 @@
-# syntax=docker/dockerfile:1
-
-FROM handsomefencer/club:production
-
-RUN chmod +x mise/containers/app/entrypoints/production.local.sh

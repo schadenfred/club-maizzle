@@ -1,7 +1,0 @@
-# syntax=docker/dockerfile:1
-
-FROM handsomefencer/club:production AS production
-
-RUN chmod +x mise/containers/app/entrypoints/production.staging.sh
-
-CMD /app/mise/containers/app/entrypoints/production.staging.sh
