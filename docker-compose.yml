@@ -1,8 +1,12 @@
 services:
-  maizzle:
+  maizzle: &maizzle
     build:
       context: .
       dockerfile: ./mise/containers/maizzle/Dockerfile
+    image: handsomefencer/club/maizzle 
+
+  dev:
+    <<: *maizzle
     command: npm run dev
     ports:
       - "3002:3002"
