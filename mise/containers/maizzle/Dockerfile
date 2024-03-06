@@ -12,18 +12,17 @@ WORKDIR /artifact
 FROM base AS builder
 
 RUN npx --yes degit maizzle/maizzle . -f
-
-COPY . .
-
 RUN npm install
 
 FROM base AS final
 
-COPY --from=builder /artifact/ /artifact/
-
-COPY package.json .
-COPY package-lock.json .
+COPY --from=builder /artifact/node_modules /artifact/node_modules
+COPY --from=maizzle-src package.json package-lock.json ./
 
 RUN npm install
 
-COPY . .
+COPY --from=maizzle-src . . 
+
+COPY ./app/views/ /artifact/app/views/
+
+

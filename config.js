@@ -27,7 +27,7 @@ module.exports = {
         'src/templates/roro'
       ],
       destination: {
-        path: 'build_local',
+        path: 'builds/build_local',
       },
       assets: {
         source: '../../app/javascript/images',
