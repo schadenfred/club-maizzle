@@ -17,7 +17,7 @@ module.exports = {
   build: {
     templates: {
       destination: {
-        path: 'build_production',
+        path: 'builds/app/views',
         extension: 'erb'
       },
       assets: {
