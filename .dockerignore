@@ -1,0 +1,11 @@
+# Ignore node_modules
+node_modules/
+
+
+### Roro ###
+/mise/**/*.env
+/mise/**/*.key
+!/mise/**/*.env.enc
+
+/builds
+builds
